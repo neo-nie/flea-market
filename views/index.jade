@@ -1,0 +1,74 @@
+extends layout
+
+block content
+  a.sr-only(href='#content') Skip to main content
+    //
+       Fixed navbar 
+    header.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='../')
+        nav.navbar-collapse.bs-navbar-collapse.collapse(role='navigation', style='height: 1px;')
+          ul.nav.navbar-nav
+            li
+              a(href='../getting-started') 起步
+            li
+              a(href='../css') CSS
+            li
+              a(href='../components') 组件
+            li.active
+              a(href='../javascript') JavaScript插件
+            li
+              a(href='../customize') 定制
+          ul.nav.navbar-nav.navbar-right
+            li
+              a.btn.btn-success(href='/publish') 我要转卖
+    .container
+      .row
+        .col-xs-12.col-md-6.col-lg-3
+          article.post.tag-bs3
+            section.post-featured-image
+              a.thumbnail(href='/worktile/', target='_blank')
+                img(src='/img/2.jpg', width='800', height='600', alt='Worktile', data-original='http://static.bootcss.com/expo/img/0/2f/52ee7bf7b292968f269075d73c219.jpg', style='display: block;')
+              span.bs3
+        .col-xs-12.col-md-6.col-lg-3
+          article.post.tag-bs3
+            section.post-featured-image
+              a.thumbnail(href='/opendesk/', target='_blank')
+                img(src='/img/3.jpg', width='800', height='600', alt='OpenDesk', data-original='http://static.bootcss.com/expo/img/f/e8/eda2225b4451a05bb8e67425bdef7.jpg', style='display: block;')
+              span.bs3
+        .col-xs-12.col-md-6.col-lg-3
+          article.post.tag-bs3
+            section.post-featured-image
+              a.thumbnail(href='/css-awards/', target='_blank')
+                img(src='/img/4.jpg', width='800', height='600', alt='CSS Awards', data-original='http://static.bootcss.com/expo/img/f/54/0a43e420f5ad50fc0f63202f9d68b.jpg', style='display: block;')
+              span.bs3
+        .col-xs-12.col-md-6.col-lg-3
+          article.post.tag-bs3
+            section.post-featured-image
+              a.thumbnail(href='/robinhood-2/', target='_blank')
+                img(src='/img/5.jpg', width='800', height='600', alt='Robinhood', data-original='http://static.bootcss.com/expo/img/c/fc/33eb7333bec0bb7002d09b3e05cd1.jpg', style='display: block;')
+              span.bs3
+        .col-xs-12.col-md-6.col-lg-3
+          article.post.tag-bs2
+            section.post-featured-image
+              a.thumbnail(href='/themeclue/', target='_blank')
+                img(src='/img/6.jpg', width='800', height='600', alt='Themeclue', data-original='http://static.bootcss.com/expo/img/0/64/b5d0a46c5730250438974aefa2555.jpg', style='display: block;')
+              span.bs2
+        .col-xs-12.col-md-6.col-lg-3
+          article.post.tag-bs3
+            section.post-featured-image
+              a.thumbnail(href='/robinhood/', target='_blank')
+                img(src='/img/1.jpg', width='800', height='600', alt='Robinhood', data-original='http://static.bootcss.com/expo/img/c/fc/33eb7333bec0bb7002d09b3e05cd1.jpg', style='display: block;')
+              span.bs3
+      //
+          <nav class="pagination">
+                        <a class="newer-posts" href="/">← 上一页</a>
+                        <span class="page-number">第 2 页/共 12 页</span>
+                        <a class="older-posts" href="/page/3/">下一页 →</a>
+                    </nav> 
