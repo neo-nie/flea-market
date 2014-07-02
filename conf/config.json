@@ -1,0 +1,16 @@
+{
+  "description": "UAE 会自动修改这个文件中的配置，请勿手工修改",
+  "memcached": [{
+    "name": "",
+    "host": "127.0.0.1",
+    "port": 11211
+  }],
+  "mysql": [{
+    "name": "flea",
+    "host": "10.1.72.154",
+    "port": 3306,
+    "user": "root",
+    "password": "root",
+    "database": "flea"
+  }]
+}

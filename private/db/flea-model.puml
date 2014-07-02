@@ -1,0 +1,110 @@
+@startuml
+
+'skinparam monochrome true
+'skinparam classBackgroundColor White
+skinparam classArrowColor Black
+skinparam classBorderColor Black
+skinparam stereotypeCBackgroundColor Gray
+'hide members
+hide circle
+
+class user #LightBlue {
+    id
+    name
+    mobile
+    email
+    avatar_id
+}
+
+class avatar {
+    id
+    url
+    create_time
+}
+
+class catalog {
+    id
+    name
+    pid
+}
+
+class entity #LightBlue {
+    id
+    name
+    catalog_id
+    desc
+    quality
+    price
+    create_time
+    update_time
+    user_id
+    anonymous
+}
+
+class favorite {
+    id
+    user_id
+    entity_id
+    create_time
+    is_valid
+}
+
+class comment {
+    id
+    content
+    user_id
+    entity_id
+    create_time
+    anonymous
+    pid
+}
+
+class auction {
+    id
+    user_id
+    entity_id
+    price
+    create_time
+    anonymous
+}
+
+class image {
+    id
+    url
+    create_time
+    entity_id
+}
+
+class action #LightGray {
+    id
+    name
+    desc
+}
+
+class activity #LightGray {
+    id
+    user_id
+    action_id
+    desc
+}
+
+user -r-> avatar
+entity -l-> catalog
+entity -r-> user
+catalog --> catalog : pid
+
+image -u-> entity
+favorite -u-> user
+favorite -u-> entity
+
+comment -u-> user
+comment -u-> entity
+comment --> comment : pid
+
+auction -u-> user
+auction -u-> entity
+
+activity -u-> action
+activity -u-> user
+
+@enduml
