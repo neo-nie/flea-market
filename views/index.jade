@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  script(src='/js/index.js')
   a.sr-only(href='#content') Skip to main content
     // Fixed navbar 
     header.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
@@ -17,7 +18,7 @@ block content
             li
               a(href='../getting-started') 收藏
           form.navbar-form.navbar-right
-                  button.btn.btn-success(href='/publish') 我要转卖
+                  button.btn.btn-success(type='button',id='publish') 我要转卖
           ul.nav.navbar-nav.navbar-right
               li
                   a(href='/login') 登录
