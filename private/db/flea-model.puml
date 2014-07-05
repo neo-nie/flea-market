@@ -9,27 +9,30 @@ skinparam stereotypeCBackgroundColor Gray
 hide circle
 
 class user #LightBlue {
-    id
-    name
-    mobile
-    email
-    avatar_id
+    +id      
+    name       
+    mobile      
+    email        
+    avatar_id   
+    anonymous   
+    login_at    
 }
 
 class avatar {
-    id
+    +id
     url
     create_time
 }
 
 class catalog {
-    id
-    name
+    +id
     pid
+    name
+    desc
 }
 
 class entity #LightBlue {
-    id
+    +id
     name
     catalog_id
     desc
@@ -42,47 +45,48 @@ class entity #LightBlue {
 }
 
 class favorite {
-    id
-    user_id
-    entity_id
+    +id
     create_time
-    is_valid
+    valid
+    #entity_id
+    #user_id
 }
 
 class comment {
-    id
+    +id
+    pid
     content
-    user_id
     entity_id
     create_time
+    user_id
     anonymous
-    pid
 }
 
 class auction {
-    id
-    user_id
+    +id
     entity_id
     price
     create_time
+    user_id
     anonymous
 }
 
 class image {
-    id
+    +id
     url
     create_time
+    user_id
     entity_id
 }
 
 class action #LightGray {
-    id
+    +id
     name
     desc
 }
 
 class activity #LightGray {
-    id
+    +id
     user_id
     action_id
     desc
