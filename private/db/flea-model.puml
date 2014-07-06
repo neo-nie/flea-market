@@ -47,6 +47,7 @@ class entity #LightBlue {
 class favorite {
     +id
     create_time
+    update_time
     valid
     #entity_id
     #user_id
