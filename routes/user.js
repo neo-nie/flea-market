@@ -9,7 +9,8 @@ exports.list = function(req, res){
 }
 
 exports.middleware = function (req, res, next) {
-    if (!req.session.user) {    //如果没有登录
+    var user = req.session && req.session.user;
+    if (!user) {    //如果没有登录
         console.log('not login');
         console.log(req.originalUrl);
         res.redirect('/login?from=' + req.originalUrl);

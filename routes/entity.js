@@ -1,13 +1,5 @@
 var bll = require('../private/bll/entity');
 
-exports.getItem = function (req, res) {
-
-}
-
-exports.getList = function (req, res) {
-
-}
-
 // 发布商品
 exports.publish = function (req, res) {
     var user = req.session && req.session.user;
@@ -15,7 +7,7 @@ exports.publish = function (req, res) {
         res.send({ status: 'forbidden' });
         return;
     }
-    
+
 }
 
 // 竞拍商品

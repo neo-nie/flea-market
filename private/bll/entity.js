@@ -28,16 +28,15 @@ exports.publish = function (entity, images, userId, anonymous) {
             connection.rollback(function() { throw err; });
         };
 
-        beginTransaction().then(function(){
-            return query(sql1, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, new Date(), userId, anonymous])
+        beginTransaction()
+            .thenResolve(query(sql1, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, new Date(), userId, anonymous]))
             .then(function (result){
                 var promises = [];
                 images.forEach(function(item, index){
                     promises.push(query(sql2, [result.insertId, item]));
                 })
-                Q.all(promises).then(console.log('success!')).fail(errorHandler);
+                return Q.all(promises).then(console.log('success!'));
             }, errorHandler)
-        }, errorHandler)
     });
 }
 
