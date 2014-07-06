@@ -18,42 +18,27 @@ exports.publish = function (entity, images, userId, anonymous) {
     // 1.上传图片到服务器，并获得图片id列表
     // 2.插入新商品
     var sql1 = 'insert into entity(name, catalog_id, desc, quality, price, create_time, user_id, anonymous) values(?, ?, ?, ?, ?, ?, ?, ?)';
-
     var sql2 = 'update image set entity_id=? where id=?';
 
-    dal.getConnection().then(function (connnection){
+    dal.getConnection(function (err, connnection){
         var beginTransaction = Q.nbind(connection.beginTransaction, connection),
-            query = Q.nbind(connection.query, connection);
+            query = Q.nbind(connection.query, connection),
+            commit = Q.nbind(connection.commit, connection);
+        var errorHandler = function (err){
+            connection.rollback(function() { throw err; });
+        };
 
         beginTransaction().then(function(){
-            query(sql1, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, new Date(), userId, anonymous]).then(function (result){
+            return query(sql1, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, new Date(), userId, anonymous])
+            .then(function (result){
                 var promises = [];
                 images.forEach(function(item, index){
                     promises.push(query(sql2, [result.insertId, item]));
                 })
-                Q.all(promises).then(function(){
-                    connection.commit(function(err) {
-                        if (err) { 
-                          connection.rollback(function() {
-                            throw err;
-                          });
-                        }
-                        console.log('success!');
-                    });
-                }, function (){
-                    connection.rollback(function() { throw err; });
-                })
-            },function (err){
-                connection.rollback(function() { throw err; });
-            })
-        }, function (err){
-            connection.rollback(function() { throw err; });
-        })
-    }, function (err){
-        connection.rollback(function() { throw err; });
-    }).fail(function (err){
-
-    })
+                Q.all(promises).then(console.log('success!')).fail(errorHandler);
+            }, errorHandler)
+        }, errorHandler)
+    });
 }
 
 /**
