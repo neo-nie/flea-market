@@ -1,6 +1,7 @@
 var fs = require('fs')
-    path = require('path'),
-    imageDir = path.join(__dirname, 'public', 'img', 'entity');
+    path = require('path');
+    
+var imageDir = path.join(__dirname, 'public', 'img', 'entity');
 
 /**
  * 上传图片到服务器，返回图片id和url
@@ -10,10 +11,12 @@ var fs = require('fs')
  * @return {[type]}        [description]
  */
 exports.upload = function (req, res, next) {
-    if (!req.session || !req.session.user) {
+    var user = req.session && req.session.user;
+    if (!user) {
         res.send({ status: 'forbidden' });
         return;
     }
+
     var file = req.files && req.files.image;
     if (!file) {
         res.send({ status: 'failed', message: 'no file' });
@@ -32,8 +35,6 @@ exports.upload = function (req, res, next) {
             return next(err);
         }
         var url = '/upload/' + uid + '/' + encodeURIComponent(filename);
-        res.send({ status: 'success', url: url });
+        res.send({ status: 'success', id: id, url: url });
     });
-
-    res.send({ status: 'success', url: url, id: id });
 }

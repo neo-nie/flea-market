@@ -23,9 +23,9 @@ namespace views {
     class login as "login.jade"
     class publish as "publish.jade"
     class layout as "layout.jade" #LightGray
-    layout <-- index
-    layout <-- entity
-    layout <-- publish
+    layout <|-- index
+    layout <|-- entity
+    layout <|-- publish
 }
 
 namespace private.bll {
@@ -59,6 +59,8 @@ private.dal.index <-d- private.bll.entity
 private.dal.index <-d- private.bll.image
 private.dal.index <-d- private.bll.avatar
 private.dal.index <-d- private.bll.activity
+
+private.bll.image --> node.fs
 
 private.dal.index --> node.mysql
 
