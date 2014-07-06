@@ -4,6 +4,8 @@
 // user_id、anonymous
 // images
 
+var dal = require('../dal'),
+    Q = require('q');
 /**
  * 发布转让信息
  * @param  {[type]} entity    商品 (name、catalog_id、desc、quality、price)
@@ -18,6 +20,40 @@ exports.publish = function (entity, images, userId, anonymous) {
     var sql1 = 'insert into entity(name, catalog_id, desc, quality, price, create_time, user_id, anonymous) values(?, ?, ?, ?, ?, ?, ?, ?)';
 
     var sql2 = 'update image set entity_id=? where id=?';
+
+    dal.getConnection().then(function (connnection){
+        var beginTransaction = Q.nbind(connection.beginTransaction, connection),
+            query = Q.nbind(connection.query, connection);
+
+        beginTransaction().then(function(){
+            query(sql1, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, new Date(), userId, anonymous]).then(function (result){
+                var promises = [];
+                images.forEach(function(item, index){
+                    promises.push(query(sql2, [result.insertId, item]));
+                })
+                Q.all(promises).then(function(){
+                    connection.commit(function(err) {
+                        if (err) { 
+                          connection.rollback(function() {
+                            throw err;
+                          });
+                        }
+                        console.log('success!');
+                    });
+                }, function (){
+                    connection.rollback(function() { throw err; });
+                })
+            },function (err){
+                connection.rollback(function() { throw err; });
+            })
+        }, function (err){
+            connection.rollback(function() { throw err; });
+        })
+    }, function (err){
+        connection.rollback(function() { throw err; });
+    }).fail(function (err){
+
+    })
 }
 
 /**
@@ -26,6 +62,21 @@ exports.publish = function (entity, images, userId, anonymous) {
  * @return {[type]}        Promise
  */
 exports.update = function (entity) {
+    var sql = 'update entity set name=?, catalog_id=?, desc=?, quality=?, price=?, update_time=? where id=?';
+    return dal.query(sql, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, new Date(), entity.id], function (err, result){
+        if (err) console.log(err);
+        else {
+
+        }
+    })
+}
+
+/**
+ * 获得某种分类下的所有商品
+ * @param  {[type]} catalogId [description]
+ * @return {[type]}           [description]
+ */
+exports.list = function (catalogId){
 
 }
 
@@ -39,6 +90,12 @@ exports.update = function (entity) {
  */
 exports.auction = function (entityId, price, userId, anonymous) {
     var sql = 'insert into auction(entity_id, price, create_time, user_id, anonymous) values(?, ?, ?, ?, ?)';
+    return dal.query(sql, [entityId, price, new Date(), userId, anonymous], function (err, result){
+        if (err) console.log(err);
+        else {
+
+        }
+    })
 }
 
 /**
@@ -51,6 +108,12 @@ exports.auction = function (entityId, price, userId, anonymous) {
  */
 exports.comment = function (entityId, content, userId, anonymous) {
     var sql = 'insert into comment(entity_id, content, create_time, user_id, anonymous) values(?, ?, ?, ?, ?)';
+    return dal.query(sql, [entityId, content, new Date(), userId, anonymous], function (err, result){
+        if (err) console.log(err);
+        else {
+
+        }
+    })
 }
 
 /**
@@ -62,4 +125,10 @@ exports.comment = function (entityId, content, userId, anonymous) {
  */
 exports.favorite = function (entityId, valid, userId) {
     var sql = 'insert into(entity_id, create_time, valid, user_id) values(?, ?, ?, ?) ON DUPLICATE KEY UPDATE valid=?';
+    return dal.query(sql, [entityId, new Date(), valid, userId], function (err, result){
+        if (err) console.log(err);
+        else {
+
+        }
+    })
 }

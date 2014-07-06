@@ -1,6 +1,8 @@
 // 图片属性 
 // id、url、create_time、user_id、entity_id
 
+var dal = require('../dal'),
+    Q = require('q');
 /**
  * 上传图片
  * @param  {[type]} stream 上传图片流

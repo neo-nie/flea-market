@@ -1,9 +1,10 @@
 var option = {
-    host     : '127.0.0.1',
+    host     : '10.1.72.154',
     port     : 3306,
     user     : 'root',
     password : 'root',
-    database : 'flea'
+    database : 'flea',
+    connectionLimit: 10
 };
 var mysql      = require('mysql'),
     pool = mysql.createPool(option);
@@ -11,6 +12,7 @@ var Q = require('q');
 
 pool.query('use ' + option.database);
 exports.query = Q.nbind(pool.query, pool);
+exports.getConnection = Q.nbind(pool.getConnection, pool);
 
 // connection.config.queryFormat = function (query, values) {
 //     if (!values) return query;
