@@ -8,10 +8,10 @@ exports.login = function (req, res) {
 }
 
 exports.entity = function (req, res){
-
+    res.render('entity', { title: '商品页' });
 }
 
 //发布页
 exports.publish = function (req, res){
-
+    res.render('publish', { title: '发布页' });
 }
