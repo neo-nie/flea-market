@@ -24,10 +24,10 @@ exports.getConnection = Q.nbind(pool.getConnection, pool);
 //     }.bind(this));
 // };
 
-connection.connect();
-connection.query('use database');
+// connection.connect();
+// connection.query('use database');
 
-var sql = "select * from table";
-connection.query(sql, null, function(err, rows, fields) {
-    connection.end();
-})
+// var sql = "select * from table";
+// connection.query(sql, null, function(err, rows, fields) {
+//     connection.end();
+// })
