@@ -1,4 +1,4 @@
-var bll = require('../private/bll/entity');
+//var bll = require('../private/bll/entity');
 
 // 发布商品
 exports.publish = function (req, res) {

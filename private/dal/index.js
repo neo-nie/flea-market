@@ -8,13 +8,13 @@ var option = {
 };
 var mysql = require('mysql'),
     pool = mysql.createPool(option);
-var Q = require('q');
+/*var Q = require('q');
 
 pool.query('use ' + option.database);
 exports.query = Q.nbind(pool.query, pool);
 exports.getConnection = Q.nbind(pool.getConnection, pool);
 
-console.log(module.parent.filename);
+console.log(module.parent.filename);*/
 
 // connection.config.queryFormat = function (query, values) {
 //     if (!values) return query;
