@@ -1,0 +1,67 @@
+@startuml
+
+'skinparam monochrome true
+'skinparam classBackgroundColor White
+skinparam classArrowColor Black
+skinparam classBorderColor Black
+skinparam stereotypeCBackgroundColor Gray
+hide members
+hide circle
+
+class app as "app.js" #LightBlue
+
+namespace routes {
+    class index as "index.js"
+    class user as "user.js"
+    class entity as "entity.js"
+    class image as "image.js"
+}
+
+namespace views {
+    class index as "index.jade"
+    class entity as "entity.jade"
+    class login as "login.jade"
+    class publish as "publish.jade"
+    class layout as "layout.jade" #LightGray
+    layout <|-- index
+    layout <|-- entity
+    layout <|-- publish
+}
+
+namespace private.bll {
+    class entity as "entity.js"
+    class user as "user.js"
+    class image as "image.js"
+    class avatar as "avatar.js"
+    class activity as "activity.js"
+}
+
+namespace private.dal {
+    class index as "index.js"
+}
+
+app --> routes.index
+app --> routes.entity
+app --> routes.user
+app --> routes.image
+
+routes.index --> views.index
+routes.index --> views.entity
+routes.index --> views.publish
+routes.index --> views.login
+
+routes.user --> private.bll.user
+routes.entity --> private.bll.entity
+routes.image --> private.bll.image
+
+private.dal.index <-d- private.bll.user
+private.dal.index <-d- private.bll.entity
+private.dal.index <-d- private.bll.image
+private.dal.index <-d- private.bll.avatar
+private.dal.index <-d- private.bll.activity
+
+private.bll.image --> node.fs
+
+private.dal.index --> node.mysql
+
+@enduml

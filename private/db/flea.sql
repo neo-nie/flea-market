@@ -2,7 +2,7 @@
 -- 主机:                           10.1.72.154
 -- 服务器版本:                        5.1.72-log - MySQL Community Server (GPL)
 -- 服务器操作系统:                      unknown-linux-gnu
--- HeidiSQL 版本:                  8.3.0.4779
+-- HeidiSQL 版本:                  8.3.0.4792
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `activity` (
 -- 导出  表 flea.auction 结构
 CREATE TABLE IF NOT EXISTS `auction` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '竞价id',
-  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `entity_id` int(11) DEFAULT NULL COMMENT '商品id',
   `price` double DEFAULT NULL COMMENT '竞价价格',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `anonymous` bit(1) DEFAULT NULL COMMENT '是否匿名：1-匿名，0-实名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='竞价';
@@ -77,12 +77,12 @@ CREATE TABLE IF NOT EXISTS `catalog` (
 -- 导出  表 flea.comment 结构
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论id',
+  `pid` int(11) NOT NULL COMMENT '父评论id',
   `content` varchar(1024) NOT NULL COMMENT '评论内容',
-  `user_id` int(11) NOT NULL COMMENT '用户id',
   `entity_id` int(11) NOT NULL COMMENT '商品id',
   `create_time` datetime NOT NULL COMMENT '创建时间',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
   `anonymous` bit(1) NOT NULL COMMENT '是否匿名：1-匿名，0-实名',
-  `pid` int(11) NOT NULL COMMENT '父评论id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品评论';
 
@@ -110,12 +110,13 @@ CREATE TABLE IF NOT EXISTS `entity` (
 -- 导出  表 flea.favorite 结构
 CREATE TABLE IF NOT EXISTS `favorite` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收藏id',
-  `user_id` int(11) NOT NULL COMMENT '用户id',
-  `entity_id` int(11) NOT NULL COMMENT '商品id',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '修改时间',
   `valid` bit(1) NOT NULL COMMENT '是否有效：1-有效，0-无效',
-  PRIMARY KEY (`id`)
+  `entity_id` int(11) NOT NULL COMMENT '商品id',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `entity_id_user_id` (`entity_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收藏';
 
 -- 数据导出被取消选择。
@@ -126,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '图片id',
   `url` varchar(256) NOT NULL COMMENT '图片url',
   `create_time` datetime NOT NULL COMMENT '创建时间',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `entity_id` int(11) NOT NULL COMMENT '商品id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片';
@@ -140,6 +142,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mobile` varchar(64) DEFAULT NULL COMMENT '手机号',
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `avatar_id` int(11) DEFAULT NULL COMMENT '头像id',
+  `anonymous` bit(1) DEFAULT NULL COMMENT '当前是否匿名：1-匿名， 0-实名',
+  `login_at` datetime DEFAULT NULL COMMENT '最后登录时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
 

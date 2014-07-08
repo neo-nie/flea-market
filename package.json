@@ -1,14 +1,16 @@
 {
-  "name": "application-name",
+  "name": "flea-market",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.5.0",
+    "express": "~3.5.0",
     "jade": "*",
     "stylus": "*",
-    "mysql": "~2.3.2"
+    "q": "~1.0.1",
+    "mysql": "~2.3.2",
+    "socket.io": "~1.0.6"
   }
 }
