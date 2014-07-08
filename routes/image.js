@@ -1,4 +1,4 @@
-var fs = require('fs')
+var fs = require('fs'),
     path = require('path');
     
 var imageDir = path.join(__dirname, 'public', 'img', 'entity');
