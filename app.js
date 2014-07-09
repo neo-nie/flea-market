@@ -35,7 +35,8 @@ app.get('/publish', routes.publish);
 // app.get('/users', user.list);
 app.get('/publish',routes.publish);
 
-app.post('/api/upload', image.upload);
+var multipart = require('connect-multiparty');
+app.post('/api/upload', multipart(),  image.upload);
 app.post('/api/publish', entity.publish);
 // app.get('/api/entity', entity.getItem);
 
