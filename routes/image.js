@@ -11,6 +11,7 @@ var imageDir = path.join(__dirname, 'public', 'img', 'entity');
  * @return {[type]}        [description]
  */
 exports.upload = function (req, res, next) {
+    console.log('1231231231234');
     var user = req.session && req.session.user;
     if (!user) {
         res.send({ status: 'forbidden' });

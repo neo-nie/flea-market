@@ -10,7 +10,6 @@ var http = require('http'),
 var express = require('express');
 var routes = require('./routes');
 var login = require('./routes/login');
-var publish =  require('./routes/publish');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
@@ -46,7 +45,7 @@ app.get('/login',routes.login);
 app.get('/entity', routes.entity);
 app.get('/publish', routes.publish);
 app.get('/users', user.list);
-app.get('/publish',publish.publish);
+app.get('/publish',routes.publish);
 
 app.post('/api/upload', image.upload);
 app.post('/api/publish', entity.publish);
