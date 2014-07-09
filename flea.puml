@@ -20,11 +20,13 @@ namespace routes {
 namespace views {
     class index as "index.jade"
     class entity as "entity.jade"
+    class user as "user.jade"
     class login as "login.jade"
     class publish as "publish.jade"
     class layout as "layout.jade" #LightGray
     layout <|-- index
     layout <|-- entity
+    layout <|-- user
     layout <|-- publish
 }
 
@@ -47,6 +49,7 @@ app --> routes.image
 
 routes.index --> views.index
 routes.index --> views.entity
+routes.index --> views.user
 routes.index --> views.publish
 routes.index --> views.login
 
