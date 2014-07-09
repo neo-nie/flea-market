@@ -3,18 +3,6 @@ var express = require('express'),
 var http = require('http'),
     path = require('path');
 
-/**
- * Module dependencies.
- */
-
-var express = require('express');
-var routes = require('./routes');
-var login = require('./routes/login');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
-
-var app = express();// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -44,7 +32,7 @@ app.get('/', routes.index);
 app.get('/login',routes.login);
 app.get('/entity', routes.entity);
 app.get('/publish', routes.publish);
-app.get('/users', user.list);
+// app.get('/users', user.list);
 app.get('/publish',routes.publish);
 
 app.post('/api/upload', image.upload);
