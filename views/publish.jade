@@ -1,6 +1,13 @@
 extends layout
-
 block content
-  form(action="/upload", method="post", enctype="multipart/form-data")
-    input(type="file", name="image")
-    input(type="submit", value="Upload")
+    script(src='/js/publish.js')
+    link(rel='stylesheet', href='/css/publish.css')
+    include head
+    .container
+        div.panel.panel-default
+            div.panel-heading
+                h3.panel-title 我要转卖
+            div.panel-body
+                form(action="/upload", method="post", enctype="multipart/form-data")
+                    input(type="file", name="image")
+                    input(type="submit", value="Upload")
