@@ -1,6 +1,8 @@
 extends layout
 block content
     script(src='/js/publish.js')
+    script(src='/plugin/js/jquery.uploadifive.min.js')
+    link(rel='stylesheet', href='/plugin/css/uploadifive.css')
     link(rel='stylesheet', href='/css/publish.css')
     include head
     .container
@@ -8,6 +10,9 @@ block content
             div.panel-heading
                 h3.panel-title 我要转卖
             div.panel-body
-                form(action="/upload", method="post", enctype="multipart/form-data")
-                    input(type="file", name="image")
-                    input(type="submit", value="Upload")
+                form
+                    div(id='queue')
+                    div.fileupload-wrap
+                        input(id="file_upload",name="file_upload",type="file",multiple="true",style="display:none")
+                        input(type="file",multiple="multiple",style="font-size: 30px; opacity: 0; position: absolute; right: -3px; top: -3px; z-index: 999")
+                    a(style="position: relative; top: 8px;",href="javascript:$('#file_upload').uploadifive('upload')") 上传
