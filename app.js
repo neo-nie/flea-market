@@ -29,7 +29,7 @@ var user = require('./routes/user'),
     image = require('./routes/image');
     
 app.get('/', routes.index);
-app.get('/login',routes.login);
+app.get('/login',user.login);
 app.get('/entity', routes.entity);
 app.get('/publish', routes.publish);
 // app.get('/users', user.list);
