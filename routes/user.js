@@ -8,9 +8,9 @@ var Q = require('q'),
 exports.login = function (req, res){
     var ticket = req.query.ticket;
 
+    console.log(req.session);
     if (req.session && req.session.user) {  //已经登录
         console.log('已经登录！！！');
-        console.log(req.session.user);
         res.redirect(req.query.from || '/');
         return;
     }
@@ -31,7 +31,7 @@ exports.login = function (req, res){
 
         //登录成功，跳到首页
         req.session.user = RegExp.$1;
-        console.log('user: ' + req.session.user);
+        console.log('session: ' + JSON.stringify(req.session));
         res.redirect('/');
     }).fail(function (err){
         console.log(err);
@@ -45,10 +45,11 @@ exports.list = function(req, res){
 
 exports.middleware = function (req, res, next) {
     var user = req.session && req.session.user;
+    console.log('login:' + user);
     if (!user) {    //如果没有登录
         console.log('not login');
         console.log(req.originalUrl);
-        res.redirect('/login?from=' + req.originalUrl);
+        res.redirect(LOGIN_URL + '?service=' + ENTRY_URL);
         return;
     }
     // console.log('user.middleware');

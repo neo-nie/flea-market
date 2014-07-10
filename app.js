@@ -31,9 +31,8 @@ var user = require('./routes/user'),
 app.get('/', routes.index);
 app.get('/login',user.login);
 app.get('/entity', routes.entity);
-app.get('/publish', routes.publish);
+app.get('/publish', user.middleware, routes.publish);
 // app.get('/users', user.list);
-app.get('/publish',routes.publish);
 
 var multipart = require('connect-multiparty');
 app.post('/api/upload', multipart(),  image.upload);
