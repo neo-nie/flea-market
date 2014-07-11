@@ -1,7 +1,7 @@
 var express = require('express'),
-    app = express();
+  app = express();
 var http = require('http'),
-    path = require('path');
+  path = require('path');
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -19,26 +19,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-    app.use(express.logger('dev'));
-    app.use(express.errorHandler());
+  app.use(express.logger('dev'));
+  app.use(express.errorHandler());
 }
 
 var routes = require('./routes');
 var user = require('./routes/user'),
-    entity = require('./routes/entity'),
-    image = require('./routes/image');
-    
+  entity = require('./routes/entity'),
+  image = require('./routes/image');
+
 app.get('/', routes.index);
-app.get('/login',user.login);
+app.get('/login', user.login);
+app.get('/getUser', user.getUser);
 app.get('/entity', routes.entity);
 app.get('/publish', user.middleware, routes.publish);
 // app.get('/users', user.list);
 
 var multipart = require('connect-multiparty');
-app.post('/api/upload', multipart(),  image.upload);
+app.post('/api/upload', multipart(), image.upload);
 app.post('/api/publish', entity.publish);
 // app.get('/api/entity', entity.getItem);
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
