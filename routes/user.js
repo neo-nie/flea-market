@@ -33,10 +33,10 @@ exports.login = function(req, res) {
       body = data[1];
 
     var user = parseUser(body); //解析用户信息
-    bll.login(user);
-
-    req.session.user = user;
-    res.redirect('/');
+    return bll.login(user.name, user.alias).then(function(user){
+      req.session.user = user;
+      res.redirect('/');
+    })
   }).fail(function(err) {
     console.log(err);
     res.redirect(LOGIN_URL + '?service=' + ENTRY_URL);

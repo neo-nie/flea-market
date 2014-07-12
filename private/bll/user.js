@@ -1,7 +1,7 @@
 // 用户属性
 // id, name, mobile, email, avatar_id, anonymous
-var dal = require('../dal'),
-    Q = require('q');
+var dal = require('../dal')
+  , Q = require('q');
 
 /**
  * 登陆
@@ -12,10 +12,10 @@ var dal = require('../dal'),
 exports.login = function (name, alias){
   var deferred = Q.defer();
 
-  var loginAt = new Date();
+  var login_at = new Date();
   var sql = 'insert into user(name, alias, login_at) values(?, ?, ?) on duplicate key update login_at=?';
 
-  dal.query(sql, [name, alias, loginAt, loginAt], function (err, result){
+  dal.query(sql, [name, alias, login_at, login_at], function (err, result){
     if (err) 
       deferred.reject(err);
     else
