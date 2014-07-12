@@ -1,8 +1,4 @@
-var fs = require('fs')
-  , path = require('path');
 var bll = require('../private/bll/image');
-
-var imageDir = path.join(__dirname, 'public', 'img', 'entity');
 
 /**
  * 上传图片到服务器，返回图片id和url

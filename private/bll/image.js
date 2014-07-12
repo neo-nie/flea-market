@@ -16,10 +16,15 @@ exports.upload = function (file, userId){
   var deferred = Q.defer();
 
   var fileName = new Date().getTime().toString()+'.jpg'
-    , savepath = path.join('./public/img/entity',fileName);
+    , imgDir = './public/img/entity'
+    , savepath = path.join(imgDir,fileName);
+
   var is = fs.createReadStream(file.path)
     , os = fs.createWriteStream(savepath);
   var sql = 'insert into image(user_id, create_time, url) values(?, ?, ?)';
+
+  if(!fs.existsSync(imgDir))
+     fs.mkdirSync(imgDir, 0766, function (err){});
 
   is.pipe(os);
   is.on('end',function() {
