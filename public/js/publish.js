@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  setUserInfo();
   $('#file_upload').uploadifive({
     'auto': true,
     'buttonClass': 'upload-btn',

@@ -48,9 +48,15 @@ html(lang='zh-cn')
             li
               a(id='showName') 匿名
           ul.nav.navbar-nav.navbar-right
-            li
-              a.logout(style='display:none') [退出]
+            if(user)
+              li
+                a.logout(href='/logout') [退出]
           ul.nav.navbar-nav.navbar-right
             li
-              a(id='login',href='/login')
+              if(user)
+                a=user.username
+              else
+                a(id='login',href='/login') 登录
+
+
     block content
