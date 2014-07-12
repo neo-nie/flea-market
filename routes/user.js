@@ -29,10 +29,9 @@ exports.login = function(req, res) {
 
   var url = VALIDATE_URL + '?service=' + ENTRY_URL + '&ticket=' + ticket;
   get(url).then(function(data) {
-    var resp = data[0],
-      body = data[1];
-
+    var resp = data[0], body = data[1];
     var user = parseUser(body); //解析用户信息
+    
     return bll.login(user.name, user.alias).then(function(user){
       req.session.user = user;
       res.redirect('/');
