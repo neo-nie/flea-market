@@ -60,8 +60,11 @@ function parseUser (body) {
   return user;
 }
 
+// 用户注销
 exports.logout = function(req, res) {
-  get(LOGOUT_URL).then(res.redirect(req.query.from || '/')).fail(res.send(200));
+  req.session.user = null;
+  res.redirect(LOGOUT_URL+'?service='+ENTRY_URL);
+  // get(LOGOUT_URL).then(res.redirect(req.query.from || '/')).fail(res.send(200));
 }
 
 exports.list = function(req, res) {
