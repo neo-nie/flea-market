@@ -31,7 +31,6 @@ var user = require('./routes/user')
 app.get('/', routes.index);
 app.get('/login', user.login);
 app.get('/logout', user.logout);
-app.get('/getUser', user.getUser);
 app.get('/entity', routes.entity);
 app.get('/publish', user.middleware, routes.publish);
 // app.get('/users', user.list);

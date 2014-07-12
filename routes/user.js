@@ -83,17 +83,3 @@ exports.middleware = function(req, res, next) {
   // console.log('user.middleware');
   return next();
 }
-
-exports.getUser = function(req, res) {
-  var user = req.session.user || null
-    , result = {};
-  if (user) {
-    result = {
-      state: 'success',
-      user: user
-    }
-  } else {
-    result.state = 'fail';
-  }
-  res.send(result)
-}
