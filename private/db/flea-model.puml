@@ -52,6 +52,7 @@ class favorite {
     valid
     #entity_id
     #user_id
+    anonymous
 }
 
 class comment {

@@ -10,6 +10,7 @@ exports.publish = function (req, res) {
 
   var entity = {
       'name': req.body.name,
+      'catalog_id': req.body.catalogId,
       'desc': req.body.desc,
       'quality': req.body.quality,
       'price': req.body.price,
