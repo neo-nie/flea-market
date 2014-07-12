@@ -10,7 +10,8 @@ hide circle
 
 class user #LightBlue {
     +id      
-    name       
+    #name   
+    alias    
     mobile      
     email        
     avatar_id   

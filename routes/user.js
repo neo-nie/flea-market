@@ -1,7 +1,7 @@
-var VALIDATE_URL = 'https://ilogin.ucweb.com/sso/serviceValidate'
-  , LOGIN_URL = 'https://ilogin.ucweb.com/sso/login'
-  , LOGOUT_URL = 'https://ilogin.ucweb.com/sso/logout'
-  , ENTRY_URL = 'http://10.1.88.176:3000/login';
+var VALIDATE_URL  = 'https://ilogin.ucweb.com/sso/serviceValidate'
+  , LOGIN_URL     = 'https://ilogin.ucweb.com/sso/login'
+  , LOGOUT_URL    = 'https://ilogin.ucweb.com/sso/logout'
+  , ENTRY_URL     = 'http://10.1.88.176:3000/login';
 
 //统一登录测试地址
 // var VALIDATE_URL = 'https://meet.ucweb.local:8445/sso/serviceValidate'

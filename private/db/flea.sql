@@ -2,7 +2,7 @@
 -- 主机:                           10.1.72.154
 -- 服务器版本:                        5.1.72-log - MySQL Community Server (GPL)
 -- 服务器操作系统:                      unknown-linux-gnu
--- HeidiSQL 版本:                  8.3.0.4792
+-- HeidiSQL 版本:                  8.3.0.4795
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -138,13 +138,15 @@ CREATE TABLE IF NOT EXISTS `image` (
 -- 导出  表 flea.user 结构
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `name` varchar(64) DEFAULT NULL COMMENT '用户名称',
+  `name` varchar(64) NOT NULL COMMENT '用户名称',
+  `alias` varchar(64) DEFAULT NULL,
   `mobile` varchar(64) DEFAULT NULL COMMENT '手机号',
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `avatar_id` int(11) DEFAULT NULL COMMENT '头像id',
   `anonymous` bit(1) DEFAULT NULL COMMENT '当前是否匿名：1-匿名， 0-实名',
   `login_at` datetime DEFAULT NULL COMMENT '最后登录时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
 
 -- 数据导出被取消选择。
