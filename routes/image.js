@@ -1,5 +1,6 @@
-var fs = require('fs'),
-  path = require('path');
+var fs = require('fs')
+  , path = require('path');
+var bll = require('../private/bll/image');
 
 var imageDir = path.join(__dirname, 'public', 'img', 'entity');
 

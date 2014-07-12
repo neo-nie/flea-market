@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `image` (
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `name` varchar(64) NOT NULL COMMENT '用户名称',
-  `alias` varchar(64) DEFAULT NULL,
+  `alias` varchar(64) DEFAULT NULL COMMENT '用户别名，如中文名',
   `mobile` varchar(64) DEFAULT NULL COMMENT '手机号',
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `avatar_id` int(11) DEFAULT NULL COMMENT '头像id',
