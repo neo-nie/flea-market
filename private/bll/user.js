@@ -5,11 +5,10 @@ var dal = require('../dal'),
 
 /**
  * 登陆
- * @param  {[type]} username 用户名
- * @param  {[type]} password 密码
+ * @param  {[type]} user     用户，包括uid，cname等属性
  * @return {[type]}          Promise
  */
-exports.login = function (username, password){
+exports.login = function (user){
     var sql = 'select * from user where name=? and password=?';
 
 }
