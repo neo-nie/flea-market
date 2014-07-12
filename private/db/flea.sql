@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `url` varchar(256) NOT NULL COMMENT '图片url',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
-  `entity_id` int(11) NOT NULL COMMENT '商品id',
+  `entity_id` int(11) DEFAULT NULL COMMENT '商品id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片';
 

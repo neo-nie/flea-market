@@ -78,13 +78,11 @@ exports.list = function(req, res) {
 
 exports.middleware = function(req, res, next) {
   var user = req.session && req.session.user;
-  console.log('login:' + user);
   if (!user) { //如果没有登录
-    console.log('not login');
-    console.log(req.originalUrl);
     res.redirect(LOGIN_URL + '?service=' + ENTRY_URL);
     return;
   }
+  console.log('login:' + JSON.stringify(user));
   // console.log('user.middleware');
   return next();
 }

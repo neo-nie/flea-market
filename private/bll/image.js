@@ -13,15 +13,26 @@ var fs = require('fs')
  * @return {[type]}        Promise
  */
 exports.upload = function (file, userId){
-  var sql = 'insert into image(user_id, create_time, url) values(?, ?, ?)';
   var deferred = Q.defer();
 
-  fs.rename(file.path, savepath, function (err) {
-    if (err) {
-      deferred.reject(err);
-    }
-    var url = '/upload/' + uid + '/' + encodeURIComponent(filename);
-    res.send({ status: 'success', id: id, url: url });
+  var fileName = new Date().getTime().toString()+'.jpg'
+    , savepath = path.join('./public/img/entity',fileName);
+  var is = fs.createReadStream(file.path)
+    , os = fs.createWriteStream(savepath);
+  var sql = 'insert into image(user_id, create_time, url) values(?, ?, ?)';
+
+  is.pipe(os);
+  is.on('end',function() {
+    fs.unlinkSync(file.path);
+
+    var url = '/img/entity/'+fileName
+      , create_time = new Date();
+    dal.query(sql, [userId, create_time, url], function (err, result){
+      if (err)
+        deferred.reject(err);
+      else
+        deferred.resolve({ 'id': '123', 'url': url });
+    })
   });
 
   return deferred.promise;
