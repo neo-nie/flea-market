@@ -44,3 +44,48 @@ exports.anonymous = function (userId, value){
     var sql = 'update user set anonymous=IF(anonymous, 0, 1) where id=?';
     return dal.query(sql, [value, userId]);
 }
+
+/**
+ * 获取用户竞价的所有商品
+ * @param  {[type]} userId 用户id
+ * @return {[type]}        Promise
+ */
+exports.auctions = function (userId) {
+  var sql = 'select * from auction where user_id=?'
+    , deferred = Q.defer();
+
+  dal.query(sql, [userId], function (err, result){
+    if (err) deferred.reject(err);
+    else deferred.resolve(result);
+  })
+}
+
+/**
+ * 获取用户评论的所有商品
+ * @param  {[type]} userId 用户id
+ * @return {[type]}        Promise
+ */
+exports.comments = function (userId) {
+  var sql = 'select * from comment where user_id=?'
+    , deferred = Q.defer();
+
+  dal.query(sql, [userId], function (err, result){
+    if (err) deferred.reject(err);
+    else deferred.resolve(result);
+  })
+}
+
+/**
+ * 获取用户收藏的所有商品
+ * @param  {[type]} userId 用户id
+ * @return {[type]}        Promise
+ */
+exports.favorites = function (userId) {
+  var sql = 'select * from favorite where user_id=?'
+    , deferred = Q.defer();
+
+  dal.query(sql, [userId], function (err, result){
+    if (err) deferred.reject(err);
+    else deferred.resolve(result);
+  })
+}

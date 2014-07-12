@@ -50,8 +50,16 @@ exports.publish = function(entity, imageIds, userId, anonymous) {
  * @return {[type]}        Promise
  */
 exports.update = function(entity) {
+  var deferred = Q.defer();
+
   var sql = 'update entity set name=?, catalog_id=?, desc=?, quality=?, price=?, update_time=? where id=?';
-  return dal.query(sql, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, new Date(), entity.id])
+  entity.update_time = new Date();
+  dal.query(sql, [entity.name, entity.catalog_id, entity.desc, entity.quality, entity.price, entity.update_time, entity.id], function (err, result){
+    if (err) deferred.reject(err);
+    else {
+      deferred.resolve(entity);
+    }
+  })
 }
 
 /**
@@ -72,8 +80,16 @@ exports.list = function(catalogId) {
  * @return {[type]}           Promise
  */
 exports.auction = function(entityId, price, userId, anonymous) {
+  var deferred = Q.defer();
   var sql = 'insert into auction(entity_id, price, create_time, user_id, anonymous) values(?, ?, ?, ?, ?)';
-  return dal.query(sql, [entityId, price, new Date(), userId, anonymous])
+
+  var create_time = new Date();
+  dal.query(sql, [entityId, price, create_time, userId, anonymous], function (err, result) {
+    if (err) deferred.reject(err);
+    else {
+      deferred.resolve({'id': result.insertId, 'entity_id': entityId, 'price': price, 'create_time': create_time, 'user_id': userId, 'anonymous': anonymous});
+    }
+  })
 }
 
 /**
@@ -85,8 +101,14 @@ exports.auction = function(entityId, price, userId, anonymous) {
  * @return {[type]}           Promise
  */
 exports.comment = function(entityId, content, userId, anonymous) {
+  var deferred = Q.defer();
   var sql = 'insert into comment(entity_id, content, create_time, user_id, anonymous) values(?, ?, ?, ?, ?)';
-  return dal.query(sql, [entityId, content, new Date(), userId, anonymous])
+  var create_time = new Date();
+  dal.query(sql, [entityId, content, create_time, userId, anonymous], function (err, result){
+    if (err) deferred.reject(err);
+    else 
+      deferred.resolve({'id': result.insertId, 'content': content, 'entity_id': entityId, 'create_time': create_time, 'user_id': userId, 'anonymous': anonymous});
+  })
 }
 
 /**
@@ -97,6 +119,13 @@ exports.comment = function(entityId, content, userId, anonymous) {
  * @return {[type]}          Promise
  */
 exports.favorite = function(entityId, valid, userId) {
+  var deferred = Q.defer();
   var sql = 'insert into(entity_id, create_time, valid, user_id) values(?, ?, ?, ?) ON DUPLICATE KEY UPDATE valid=?';
-  return dal.query(sql, [entityId, new Date(), valid, userId])
+  var create_time = new Date();
+
+  dal.query(sql, [entityId, create_time, valid, userId], function (err, result){
+    if (err) deferred.reject(err);
+    else 
+      deferred.resolve({'id': result.insertId, 'entity_id': entityId, 'create_time': create_time, 'user_id': userId, 'valid': valid});
+  })
 }
