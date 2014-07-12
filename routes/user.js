@@ -51,12 +51,12 @@ function parseUser (body) {
     throw new Error('登录失败');
   }
   //登录成功，跳到首页
-  user.username = RegExp.$1;
+  user.alias = RegExp.$1;
   var regex2 = /\<cas\:uid\>(.*)\<\/cas\:uid\>/;
   if (!regex2.test(body)) { //登录失败，跳转到oa登录页
     throw new Error('登录失败');
   }
-  user.uid = RegExp.$1;
+  user.name = RegExp.$1;
   return user;
 }
 
@@ -65,6 +65,11 @@ exports.logout = function(req, res) {
   req.session.user = null;
   res.redirect(LOGOUT_URL+'?service='+ENTRY_URL);
   // get(LOGOUT_URL).then(res.redirect(req.query.from || '/')).fail(res.send(200));
+}
+
+// 切换匿名模式
+exports.anonymous = function (req, res){
+  res.send(204);
 }
 
 exports.list = function(req, res) {

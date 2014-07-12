@@ -38,6 +38,7 @@ app.get('/publish', user.middleware, routes.publish);
 var multipart = require('connect-multiparty');
 app.post('/api/upload', multipart(), image.upload);
 app.post('/api/publish', entity.publish);
+app.get('/api/anonymous', user.anonymous);
 // app.get('/api/entity', entity.getItem);
 
 http.createServer(app).listen(app.get('port'), function () {
