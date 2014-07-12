@@ -58,6 +58,7 @@ exports.auctions = function (userId) {
     if (err) deferred.reject(err);
     else deferred.resolve(result);
   })
+  return deferred.promise;
 }
 
 /**
@@ -73,6 +74,7 @@ exports.comments = function (userId) {
     if (err) deferred.reject(err);
     else deferred.resolve(result);
   })
+  return deferred.promise;
 }
 
 /**
@@ -88,4 +90,5 @@ exports.favorites = function (userId) {
     if (err) deferred.reject(err);
     else deferred.resolve(result);
   })
+  return deferred.promise;
 }
