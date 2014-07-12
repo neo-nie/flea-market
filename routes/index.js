@@ -5,7 +5,7 @@ exports.index = function (req, res) {
 
 //登录页
 exports.login = function (req, res) {
-    res.render('login', {title: '登录页'});
+  res.render('login', {title: '登录页'});
 }
 
 //商品详情页
@@ -20,5 +20,5 @@ exports.publish = function (req, res) {
 
 //用户页
 exports.user = function (req, res) {
-    res.render('user', { title: '用户页'});
+  res.render('user', { title: '用户页'});
 }
