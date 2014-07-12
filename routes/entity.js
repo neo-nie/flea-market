@@ -17,7 +17,7 @@ exports.publish = function (req, res) {
       'create_time': new Date()
   };
   var userId = user.id 
-    , anonymous = user.anonymous,
+    , anonymous = user.anonymous
     , imageIds = req.body.imageIds;
 
   bll.publish(entity, imageIds, userId, anonymous)
@@ -37,7 +37,7 @@ exports.auction = function (req, res) {
   }
 
   var entityId = req.body.entityId
-    , price = req.body.price;
+    , price = req.body.price
     , userId = user.id 
     , anonymous = user.anonymous;
 
@@ -58,7 +58,7 @@ exports.comment = function (req, res) {
   }
 
   var entityId = req.body.entityId
-    , content = req.body.content;
+    , content = req.body.content
     , userId = user.id 
     , anonymous = user.anonymous;
 
@@ -79,7 +79,7 @@ exports.favorite = function (req, res) {
   }
 
   var entityId = req.body.entityId
-    , valid = req.body.valid;
+    , valid = req.body.valid
     , userId = user.id 
     , anonymous = user.anonymous;
 
