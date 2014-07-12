@@ -1,10 +1,5 @@
 $(document).ready(function () {
-  var user = getCookie('user');
-  if(user){
-    $('#login').html(user.username);
-  }else{
-    $('#login').html('登录');
-  }
+  setUserInfo();
   $('#file_upload').uploadifive({
     'auto': true,
     'buttonClass': 'upload-btn',
