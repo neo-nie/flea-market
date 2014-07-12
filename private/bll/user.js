@@ -18,8 +18,17 @@ exports.login = function (name, alias){
   dal.query(sql, [name, alias, login_at, login_at], function (err, result){
     if (err) 
       deferred.reject(err);
-    else
-      deferred.resolve({'id': result.insertId, 'name': name, 'alias': alias, 'login_at': login_at});
+    else {
+      dal.query('select * from user where id=?', result.insertId, function (err, result){
+        if (err) 
+          deferred.reject(err);
+        else if (result.length > 0){
+          deferred.resolve(result[0]);
+        }else {
+          deferred.reject(new Error('can not found user ' + result.insertId));
+        }
+      })
+    }
   })
 
   return deferred.promise;
@@ -32,6 +41,6 @@ exports.login = function (name, alias){
  * @return {[type]}       Promise 返回用户信息
  */
 exports.anonymous = function (userId, value){
-    var sql = 'update user set anonymous=? where id=?';
+    var sql = 'update user set anonymous=IF(anonymous, 0, 1) where id=?';
     return dal.query(sql, [value, userId]);
 }

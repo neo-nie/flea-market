@@ -46,7 +46,10 @@ html(lang='zh-cn')
           ul.nav.navbar-nav.navbar-right
             if user
               li: a(href='/user')= user.alias
-              li: a(href='/api/anonymous') 匿名
+              if user.anonymous == 1
+                li: a(href='/api/anonymous') 匿名
+              else
+                li: a(href='/api/anonymous') 实名
               li: a.logout(href='/logout') [退出]
             else
               li: a(id='login',href='/login') 登录
