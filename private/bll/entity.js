@@ -37,9 +37,7 @@ exports.publish = function(entity, imageIds, userId, anonymous) {
         })
         return Q.all(promises).then(console.log('success!'));
       }).fail(function(err) {
-        connection.rollback(function() {
-          throw err;
-        });
+        connection.rollback(function() { throw err; });
       })
   });
 }
@@ -120,9 +118,10 @@ exports.comment = function(entityId, content, userId, anonymous) {
  * @param  {[type]} entityId 商品id
  * @param  {[type]} valid    收藏是否有效：true - 收藏，false - 取消收藏
  * @param  {[type]} userId   用户id
+ * @param  {[type]} anonymous 是否匿名：true-匿名，false-实名
  * @return {[type]}          Promise
  */
-exports.favorite = function(entityId, valid, userId) {
+exports.favorite = function(entityId, valid, userId, anonymous) {
   var sql = 'insert into(entity_id, create_time, valid, user_id) values(?, ?, ?, ?) ON DUPLICATE KEY UPDATE valid=?'
     , deferred = Q.defer();
 
