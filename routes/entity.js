@@ -9,12 +9,12 @@ exports.publish = function (req, res) {
   }
 
   var entity = {
-      'name': req.body.name,
-      'catalog_id': req.body.catalogId,
-      'desc': req.body.desc,
-      'quality': req.body.quality,
-      'price': req.body.price,
-      'create_time': new Date()
+      'name': req.body.name,                //名称
+      'catalog_id': req.body.catalogId,     //分类ID
+      'desc': req.body.desc,                //描述
+      'quality': req.body.quality,          //成色（几成新）
+      'price': req.body.price,              //价格
+      'create_time': new Date()            //创建时间
   };
   var userId = user.id 
     , anonymous = user.anonymous

@@ -18,4 +18,18 @@ block content
           div.pic-preview-title 图片预览
           div.pic-preview-content
             img.pic-preview-img
+          div.input-group
+            span.input-group-addon 名称：
+            input.form-control(id='entityName', placeholder='名称')
+          div.dropdown
+            button.btn.btn-default.dropdown-toggle(type="button",id="dropdownMenu1",data-toggle="dropdown") 选择分类
+              span.caret
+          ul.dropdown-menu(role="menu",aria-labelledby="dropdownMenu1")
+            li(role="presentation")
+              a(role="menuitem" tabindex="-1" href="#") 数码产品
+            li(role="presentation")
+              a(role="menuitem" tabindex="-1" href="#") 服装首饰
+            li(role="presentation")
+              a(role="menuitem" tabindex="-1" href="#") 生活电器
+
           button.btn.btn-danger(type='button',id='release') 我要发布
