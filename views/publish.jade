@@ -1,21 +1,21 @@
 extends layout
 block content
-    script(src='/js/publish.js')
-    script(src='/js/jquery.uploadifive.min.js')
-    link(rel='stylesheet', href='/css/uploadifive.css')
-    link(rel='stylesheet', href='/css/publish.css')
-    .container
-        div.panel.panel-default
-            div.panel-heading
-                h3.panel-title 我要转卖
-            div.panel-body
-                form
-                    div.fileupload-tips  格式：JPG、GIF 、PNG (文件不要超过2MB).
-                    div.fileupload-wrap
-                        input(id="file_upload",name="file_upload",type="file",style="display:none")
-                    div(id='imgType')
-                div.pic-preview-wrap
-                    div.pic-preview-title 图片预览
-                    div.pic-preview-content
-                        img.pic-preview-img
-                    button.btn.btn-danger(type='button',id='release') 我要发布
+  script(src='/js/publish.js')
+  script(src='/js/jquery.uploadifive.min.js')
+  link(rel='stylesheet', href='/css/uploadifive.css')
+  link(rel='stylesheet', href='/css/publish.css')
+  .container
+    div.panel.panel-default
+      div.panel-heading
+        h3.panel-title 我要转让
+      div.panel-body
+        form
+          div.fileupload-tips  格式：JPG、GIF 、PNG (文件不要超过2MB).
+          div.fileupload-wrap
+            input(id="file_upload",name="file_upload",type="file",style="display:none")
+          div(id='imgType')
+        div.pic-preview-wrap
+          div.pic-preview-title 图片预览
+          div.pic-preview-content
+            img.pic-preview-img
+          button.btn.btn-danger(type='button',id='release') 我要发布

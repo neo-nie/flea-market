@@ -29,14 +29,13 @@ exports.login = function(req, res) {
 
   var url = VALIDATE_URL + '?service=' + ENTRY_URL + '&ticket=' + ticket;
   get(url).then(function(data) {
-    var resp = data[0],
-      body = data[1];
-
+    var resp = data[0], body = data[1];
     var user = parseUser(body); //解析用户信息
-    bll.login(user);
-
-    req.session.user = user;
-    res.redirect('/');
+    
+    return bll.login(user.name, user.alias).then(function(user){
+      req.session.user = user;
+      res.redirect('/');
+    })
   }).fail(function(err) {
     console.log(err);
     res.redirect(LOGIN_URL + '?service=' + ENTRY_URL);
@@ -51,12 +50,12 @@ function parseUser (body) {
     throw new Error('登录失败');
   }
   //登录成功，跳到首页
-  user.username = RegExp.$1;
+  user.alias = RegExp.$1;
   var regex2 = /\<cas\:uid\>(.*)\<\/cas\:uid\>/;
   if (!regex2.test(body)) { //登录失败，跳转到oa登录页
     throw new Error('登录失败');
   }
-  user.uid = RegExp.$1;
+  user.name = RegExp.$1;
   return user;
 }
 
@@ -67,19 +66,22 @@ exports.logout = function(req, res) {
   // get(LOGOUT_URL).then(res.redirect(req.query.from || '/')).fail(res.send(200));
 }
 
+// 切换匿名模式
+exports.anonymous = function (req, res){
+  res.send(204);
+}
+
 exports.list = function(req, res) {
   res.send("respond with a resource");
 }
 
 exports.middleware = function(req, res, next) {
   var user = req.session && req.session.user;
-  console.log('login:' + user);
   if (!user) { //如果没有登录
-    console.log('not login');
-    console.log(req.originalUrl);
     res.redirect(LOGIN_URL + '?service=' + ENTRY_URL);
     return;
   }
+  console.log('login:' + JSON.stringify(user));
   // console.log('user.middleware');
   return next();
 }

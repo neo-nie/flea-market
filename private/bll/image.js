@@ -13,31 +13,32 @@ var fs = require('fs')
  * @return {[type]}        Promise
  */
 exports.upload = function (file, userId){
-  var sql = 'insert into image(user_id, create_time, url) values(?, ?, ?)';
   var deferred = Q.defer();
 
-  if (!file) {
-    res.send({ status: 'failed', message: 'no file' });
-    return;
-  }
+  var fileName = new Date().getTime().toString()+'.jpg'
+    , imgDir = './public/img/entity'
+    , savepath = path.join(imgDir,fileName);
 
-  var fileName = new Date().getTime().toString()+'.jpg';
-  var savepath = path.join('./public/img/entity',fileName);
-  var is = fs.createReadStream(file.path);
-  var os = fs.createWriteStream(savepath);
+  var is = fs.createReadStream(file.path)
+    , os = fs.createWriteStream(savepath);
+  var sql = 'insert into image(user_id, create_time, url) values(?, ?, ?)';
+
+  if(!fs.existsSync(imgDir))
+     fs.mkdirSync(imgDir, 0766, function (err){});
+
   is.pipe(os);
   is.on('end',function() {
-   // fs.unlinkSync(file.path);
-    //res.send({ status: 'success', id: '123', url:'/img/entity/'+fileName});
-  });
+    fs.unlinkSync(file.path);
 
- /* fs.rename(file.path, savepath, function (err) {
-    if (err) {
-      deferred.reject(err);
-    }
-    var url = '/upload/' + uid + '/' + encodeURIComponent(filename);
-    res.send({ status: 'success', id: id, url: url });
-  });*/
+    var url = '/img/entity/'+fileName
+      , create_time = new Date();
+    dal.query(sql, [userId, create_time, url], function (err, result){
+      if (err)
+        deferred.reject(err);
+      else
+        deferred.resolve({ 'id': '123', 'url': url });
+    })
+  });
 
   return deferred.promise;
 }

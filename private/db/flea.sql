@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `favorite` (
   `valid` bit(1) NOT NULL COMMENT '是否有效：1-有效，0-无效',
   `entity_id` int(11) NOT NULL COMMENT '商品id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
+  `anonymous` bit(1) NOT NULL COMMENT '是否匿名：1-匿名，0-实名',
   PRIMARY KEY (`id`),
   UNIQUE KEY `entity_id_user_id` (`entity_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收藏';
@@ -128,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `url` varchar(256) NOT NULL COMMENT '图片url',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
-  `entity_id` int(11) NOT NULL COMMENT '商品id',
+  `entity_id` int(11) DEFAULT NULL COMMENT '商品id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片';
 

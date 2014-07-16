@@ -12,7 +12,7 @@ $(document).ready(function () {
     'uploadScript': 'api/upload',
     'onUploadComplete': function (file, data) {
       data = JSON.parse(data);
-      $('.pic-preview-img').attr('src','./'+data.url);
+      $('.pic-preview-img').attr('src','./'+data.data.url);
       var type = file.type.split('/')[1];
       type = type.replace('jpeg', 'jpg');
       $('#imgType').html(type);

@@ -1,8 +1,4 @@
-var fs = require('fs')
-  , path = require('path');
 var bll = require('../private/bll/image');
-
-var imageDir = path.join(__dirname, 'public', 'img', 'entity');
 
 /**
  * 上传图片到服务器，返回图片id和url
@@ -17,6 +13,16 @@ exports.upload = function (req, res, next) {
     res.send({ status: 'forbidden' });
     return;
   }
+
   var file = req.files && req.files.Filedata;
-  var img = bll.upload(file, user.uid);
+  if (!file) {
+    res.send({ status: 'failed', message: 'no file' });
+    return;
+  }
+
+  bll.upload(file, user.id).then(function(image){
+    res.send({status: 'success', data: image});
+  }).fail(function (err){
+    res.send({status: 'error', error: err});
+  })
 }

@@ -1,34 +1,33 @@
 doctype html
 html(lang='zh-cn')
-    head
-        title= title
-        meta(charset='utf-8')
-        meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        meta(name='viewport', content='width=device-width, initial-scale=1.0')
-        meta(name='description', content='')
-        meta(name='author', content='')
-        link(rel='stylesheet', href='/css/style.css')
-        link(rel='stylesheet', href='/css/login.css')
-        link(rel='shortcut icon', href='../../docs-assets/ico/favicon.png')
-        title
-        // 最新 Bootstrap 核心 CSS 文件
-    body
-        block content
-            form
-                div.login-wrap
-                    dl.login-dl
-                        dt
-                            span 爱售网登录
-                        dd
-                            ul.login-list
-                                li
-                                    span.icon-name
-                                    input(type='text',id='username',name='username',placeholder='请输入用户名')
-                                li.noline-b
-                                    span.icon-pass
-                                    input(type='password',id='password',name='password',placeholder='请输入密码')
-                            div.login-btn
-                                button.btn-orange(type='submit') 登 录
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/login.css')
+    link(rel='shortcut icon', href='../../docs-assets/ico/favicon.png')
+    // 最新 Bootstrap 核心 CSS 文件
+  body
+    block content
+      form
+        div.login-wrap
+          dl.login-dl
+            dt
+              span 爱售网登录
+            dd
+              ul.login-list
+                li
+                  span.icon-name
+                  input(type='text',id='username',name='username',placeholder='请输入用户名')
+                li.noline-b
+                  span.icon-pass
+                  input(type='password',id='password',name='password',placeholder='请输入密码')
+              div.login-btn
+                button.btn-orange(type='submit') 登 录
 
 
 

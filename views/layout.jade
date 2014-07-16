@@ -9,7 +9,6 @@ html(lang='zh-cn')
     meta(name='author', content='')
     link(rel='stylesheet', href='/css/style.css')
     link(rel='shortcut icon', href='../../docs-assets/ico/favicon.png')
-    title
     // 最新 Bootstrap 核心 CSS 文件 
     link(rel='stylesheet', href='http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css')
     // 可选的Bootstrap主题文件（一般不用引入） 
@@ -40,20 +39,17 @@ html(lang='zh-cn')
           a.navbar-brand(href='../') 爱售网
         nav.navbar-collapse.bs-navbar-collapse.collapse(role='navigation', style='height: 1px;')
           ul.nav.navbar-nav
-            li
-              a(href='../getting-started') 收藏
+            li: a(href='../getting-started') 我的收藏
           form.navbar-form.navbar-right
-            button.btn.btn-success(type='button',id='publish') 我要转卖
+            button.btn.btn-success(type='button',id='publish') 我要转让
           ul.nav.navbar-nav.navbar-right
-            li: a(id='showName') 匿名
-          ul.nav.navbar-nav.navbar-right
-            if(user)
-              li: a.logout(href='/logout') [退出]
-          ul.nav.navbar-nav.navbar-right
-            li
-              if(user)
-                a=user.username
+            if user
+              li: a(href='/user')= user.alias
+              if user.anonymous == 1
+                li: a(href='/api/anonymous') 匿名
               else
-                a(id='login',href='/login') 登录
-
+                li: a(href='/api/anonymous') 实名
+              li: a.logout(href='/logout') [退出]
+            else
+              li: a(id='login',href='/login') 登录
     block content
