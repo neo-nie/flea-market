@@ -16,7 +16,18 @@ class user #LightBlue {
     email        
     avatar_id   
     anonymous   
-    login_at    
+    login_at
+    create_time
+    update_time
+}
+
+class group {
+    +id
+    #name
+    alias
+    create_time
+    update_time
+    desc
 }
 
 class avatar {
@@ -95,6 +106,7 @@ class activity #LightGray {
     desc
 }
 
+group o-l- user
 user -r-> avatar
 entity -l-> catalog
 entity -r-> user
