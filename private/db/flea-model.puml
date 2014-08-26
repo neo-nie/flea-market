@@ -25,6 +25,7 @@ class group {
     +id
     #name
     alias
+    owner
     create_time
     update_time
     desc
